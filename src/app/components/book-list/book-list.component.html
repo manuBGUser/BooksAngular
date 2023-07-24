@@ -1,0 +1,62 @@
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .filters {
+        margin: auto;
+        width: 50%;
+        border: 3px solid;
+        padding: 10px;
+        align-content: flex-end;
+    }
+    .buscarBtn, #filter {
+        text-align: end;
+    }
+    .orderValues {
+        margin-left: 2rem;
+    }
+</style>
+<div class="filters">
+    <input id="filter" type="text" [(ngModel)]="text" (change)="filterByText()"/>
+    <button type="button" class="btn btn-primary buscarBtn" (click)="clean()">Limpiar</button>
+    <label class="orderValues">Ordenar por:
+        <select name="select" (change)="onChange($event)">
+            <option value="" selected>Ordenar por</option>
+            <option value="title">Titulo</option>
+            <option value="publisher">Editorial</option>
+        </select>
+    </label>
+</div>
+
+<br>
+<table>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Editorial</th>
+      <th>Description</th>
+    </tr>
+    <ng-container *ngFor="let book of this.books">
+        <tr routerLink="/details/{{book.id}}" >
+            <td>{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.publisher}}</td>
+            <td>{{book.description}}</td>
+          </tr>
+    </ng-container>
+    
+  </table>
